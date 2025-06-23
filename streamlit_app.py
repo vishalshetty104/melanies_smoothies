@@ -29,9 +29,10 @@ if ingredients_list:
             # values ('""" + ingredients_str ++ ','+name_on_smoothie+"""')"""
     my_insert_stmt = "insert into smoothies.public.orders(ingredients,name_on_order) values ('"+ingredients_str+"','"+name_on_smoothie+"')";
     # st.write(my_insert_stmt)
-    st.text(smoothiefroot_response)
-    
+  
     submit_order = st.button("Submit Order")
     if submit_order:
         session.sql(my_insert_stmt).collect()
         st.success(f'Your Smoothie is ordered,{name_on_smoothie}!', icon="✅")
+    # st.text(smoothiefroot_response)
+    sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
